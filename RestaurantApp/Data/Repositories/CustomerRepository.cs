@@ -1,28 +1,43 @@
-﻿using RestaurantApp.Data.Repositories.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using RestaurantApp.Data.Repositories.IRepositories;
 using RestaurantApp.Models;
 
 namespace RestaurantApp.Data.Repositories
 {
     public class CustomerRepository : ICustomerRepository
     {
-        public Task CreateCustomerAsync(Customer customer)
+        private readonly RestaurantAppContext _context;
+
+        public CustomerRepository(RestaurantAppContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public async Task CreateCustomerAsync(Customer customer)
+        {
+            await _context.AddAsync(customer);
+            await _context.SaveChangesAsync();
         }
 
-        public Task DeleteCustomerAsync(int customerId)
+        public async Task DeleteCustomerAsync(int customerId)
         {
-            throw new NotImplementedException();
+            var customer = await _context.Customers.FindAsync(customerId);
+            if (customer != null)
+            {
+                _context.Customers.Remove(customer);
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public Task<IEnumerable<Customer>> GetAllCustomersAsync()
+        public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
         {
-            throw new NotImplementedException();
+            var customers = await _context.Customers.ToListAsync();
+            return customers;
         }
 
-        public Task UpdateCustomerAsync(Customer customer)
+        public async Task UpdateCustomerAsync(Customer customer)
         {
-            throw new NotImplementedException();
+            _context.Customers.Update(customer);
+            await _context.SaveChangesAsync();
         }
     }
 }
