@@ -32,9 +32,7 @@ namespace RestaurantApp.Services
             catch (Exception)
             {
                 return (false, "Something went wrong when adding new customer to database.");
-            }
-            
-
+            }          
         }
 
         public async Task<(bool, string)> DeleteCustomerAsync(int customerId)
