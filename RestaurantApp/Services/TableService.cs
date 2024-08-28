@@ -47,9 +47,31 @@ namespace RestaurantApp.Services
             }
         }
 
-        public Task<IEnumerable<TableDTO>> GetAllTablesAsync()
+        public async Task<IEnumerable<TableDTO>> GetAllTablesAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var tables = await _tableRepository.GetAllTablesAsync();
+                var tableList = new List<TableDTO>();
+
+                foreach (var table in tables)
+                {
+                    var dto = new TableDTO
+                    {
+                        Id = table.Id,
+                        Seats = table.Seats,
+                        TableNumber = table.TableNumber                      
+                    };
+                    tableList.Add(dto);
+                }
+
+                return tableList;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception($"Something went wrong when extracting table list: {ex}");
+            }
         }
 
         public Task<(bool, string)> UpdateTableAsync(TableDTO dto)
