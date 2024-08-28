@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using RestaurantApp.Data;
+using RestaurantApp.Data.Repositories;
+using RestaurantApp.Data.Repositories.IRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,9 @@ builder.Services.AddDbContext<RestaurantAppContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
