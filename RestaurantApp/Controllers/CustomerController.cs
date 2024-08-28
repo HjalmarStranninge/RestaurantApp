@@ -31,9 +31,15 @@ namespace RestaurantApp.Controllers
 
         [HttpDelete]
         [Route("/deletecustomer")]
-        public async Task<ActionResult> DeleteCustomer()
+        public async Task<ActionResult> DeleteCustomer(int id)
         {
-            return Ok();
+            var (success, message) = await _customerService.DeleteCustomerAsync(id);
+
+            if (success)
+            {
+                return Ok(message);
+            }
+            return BadRequest(message);
         }
         [HttpPost]
         [Route("/updatecustomer")]

@@ -37,9 +37,18 @@ namespace RestaurantApp.Services
 
         }
 
-        public Task<(bool, string)> DeleteCustomerAsync(int customerId)
+        public async Task<(bool, string)> DeleteCustomerAsync(int customerId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _customerRepository.DeleteCustomerAsync(customerId);
+                return (true, "Customer deleted!");
+            }
+            catch (Exception)
+            {
+                return (false, "Customer couldn't be deleted.");
+            }
+            
         }
 
         public Task<IEnumerable<CustomerDTO>> GetAllCustomersAsync()
