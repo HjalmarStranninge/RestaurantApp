@@ -35,9 +35,10 @@ namespace RestaurantApp.Data.Repositories
             return tables;
         }
 
-        public Task UpdateTableAsync(Table table)
+        public async Task UpdateTableAsync(Table table)
         {
-            throw new NotImplementedException();
+            _context.Tables.Update(table);
+            await _context.SaveChangesAsync();
         }
     }
 }
