@@ -44,9 +44,15 @@ namespace RestaurantApp.Controllers
 
         [HttpPost]
         [Route("/updatecustomer")]
-        public async Task<ActionResult> UpdateCustomerInfo()
+        public async Task<ActionResult> UpdateCustomerInfo(CustomerDTO dto)
         {
-            return Ok();
+            var (success, message) = await _customerService.UpdateCustomerAsync(dto);
+
+            if (success)
+            {
+                return Ok(message);
+            }
+            return BadRequest(message);
         }
 
         [HttpGet]

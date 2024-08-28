@@ -82,7 +82,26 @@ namespace RestaurantApp.Services
 
         public async Task<(bool, string)> UpdateCustomerAsync(CustomerDTO dto)
         {
-            throw new NotImplementedException();
+            var customer = new Customer
+            {
+                Id = dto.Id,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Email = dto.Email,
+                PhoneNumber = dto.PhoneNumber,
+            };
+
+            try
+            {
+                await _customerRepository.UpdateCustomerAsync(customer);
+                return (true, "Customer info updated!");
+            }
+            catch (Exception)
+            {
+                return (false, "Customer info couldn't be updated.");
+            }
+
+
         }
     }
 }
