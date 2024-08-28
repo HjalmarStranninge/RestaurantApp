@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using RestaurantApp.Data.Repositories.IRepositories;
 using RestaurantApp.Models;
 
@@ -28,9 +29,10 @@ namespace RestaurantApp.Data.Repositories
             }
         }
 
-        public Task<IEnumerable<Table>> GetAllTablesAsync()
+        public async Task<IEnumerable<Table>> GetAllTablesAsync()
         {
-            throw new NotImplementedException();
+            var tables = await _context.Tables.ToListAsync();
+            return tables;
         }
 
         public Task UpdateTableAsync(Table table)
