@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RestaurantApp.Models.DTOs;
+using RestaurantApp.Services.IServices;
 
 namespace RestaurantApp.Controllers
 {
@@ -7,23 +9,40 @@ namespace RestaurantApp.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        [HttpPost]
-        public async Task<ActionResult> CreateCustomer()
+        private readonly ICustomerService _customerService;
+        public CustomerController(ICustomerService customerService)
         {
-            return Ok();
+            _customerService = customerService;
+        }
+
+        [HttpPost]
+        [Route("/createcustomer")]
+        public async Task<ActionResult> CreateCustomer(CustomerDTO dto)
+        {
+            var (success, message) = await _customerService.CreateCustomerAsync(dto);
+
+            if (success)
+            {
+                return Ok(message);
+            }
+            return BadRequest(message);
+            
         }
 
         [HttpDelete]
+        [Route("/deletecustomer")]
         public async Task<ActionResult> DeleteCustomer()
         {
             return Ok();
         }
         [HttpPost]
+        [Route("/updatecustomer")]
         public async Task<ActionResult> UpdateCustomerInfo()
         {
             return Ok();
         }
         [HttpGet]
+        [Route("/getallcustomers")]
         public async Task<ActionResult> GetAllCustomers()
         {
             return Ok();

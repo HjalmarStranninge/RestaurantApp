@@ -7,8 +7,8 @@ namespace RestaurantApp.Services.IServices
     public interface ICustomerService
     {
         Task<IEnumerable<CustomerDTO>> GetAllCustomersAsync();
-        Task CreateCustomerAsync(CustomerDTO dto);
-        Task UpdateCustomerAsync(CustomerDTO dto);
-        Task DeleteCustomerAsync(int customerId);
+        Task<(bool, string)> CreateCustomerAsync(CustomerDTO dto);
+        Task<(bool, string)> UpdateCustomerAsync(CustomerDTO dto);
+        Task<(bool, string)> DeleteCustomerAsync(int customerId);
     }
 }

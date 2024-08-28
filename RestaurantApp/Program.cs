@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using RestaurantApp.Data;
 using RestaurantApp.Data.Repositories;
 using RestaurantApp.Data.Repositories.IRepositories;
+using RestaurantApp.Services;
+using RestaurantApp.Services.IServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,7 @@ builder.Services.AddDbContext<RestaurantAppContext>(options =>
 
 
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
