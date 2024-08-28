@@ -26,7 +26,7 @@ namespace RestaurantApp.Controllers
                 return Ok(message);
             }
             return BadRequest(message);
-            
+
         }
 
         [HttpDelete]
@@ -41,17 +41,20 @@ namespace RestaurantApp.Controllers
             }
             return BadRequest(message);
         }
+
         [HttpPost]
         [Route("/updatecustomer")]
         public async Task<ActionResult> UpdateCustomerInfo()
         {
             return Ok();
         }
+
         [HttpGet]
         [Route("/getallcustomers")]
         public async Task<ActionResult> GetAllCustomers()
         {
-            return Ok();
+            var customers = await _customerService.GetAllCustomersAsync();
+            return Ok(customers);
         }
     }
 }

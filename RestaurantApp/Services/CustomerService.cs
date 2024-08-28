@@ -51,12 +51,36 @@ namespace RestaurantApp.Services
             
         }
 
-        public Task<IEnumerable<CustomerDTO>> GetAllCustomersAsync()
+        public async Task<IEnumerable<CustomerDTO>> GetAllCustomersAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var customers = await _customerRepository.GetAllCustomersAsync();
+                var customerList = new List<CustomerDTO>();
+
+                foreach (var customer in customers)
+                {
+                    var dto = new CustomerDTO
+                    {
+                        Id = customer.Id,
+                        FirstName = customer.FirstName,
+                        LastName = customer.LastName,
+                        Email = customer.Email,
+                        PhoneNumber = customer.PhoneNumber
+                    };
+                    customerList.Add(dto);
+                }
+
+                return customerList;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception($"Something went wrong when extracting customer list: {ex}");
+            }
         }
 
-        public Task<(bool, string)> UpdateCustomerAsync(CustomerDTO dto)
+        public async Task<(bool, string)> UpdateCustomerAsync(CustomerDTO dto)
         {
             throw new NotImplementedException();
         }
