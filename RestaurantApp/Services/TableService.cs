@@ -74,9 +74,24 @@ namespace RestaurantApp.Services
             }
         }
 
-        public Task<(bool, string)> UpdateTableAsync(TableDTO dto)
+        public async Task<(bool, string)> UpdateTableAsync(TableDTO dto)
         {
-            throw new NotImplementedException();
+            var table = new Table
+            {
+                Id = dto.Id,
+                Seats = dto.Seats,
+                TableNumber = dto.TableNumber               
+            };
+
+            try
+            {
+                await _tableRepository.UpdateTableAsync(table);
+                return (true, "Table info updated!");
+            }
+            catch (Exception)
+            {
+                return (false, "Table info couldn't be updated.");
+            }
         }
     }
 }

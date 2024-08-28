@@ -98,8 +98,6 @@ namespace RestaurantApp.Services
             {
                 return (false, "Customer info couldn't be updated.");
             }
-
-
         }
     }
 }
