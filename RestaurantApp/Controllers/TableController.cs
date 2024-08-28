@@ -7,5 +7,6 @@ namespace RestaurantApp.Controllers
     [ApiController]
     public class TableController : ControllerBase
     {
+
     }
 }
