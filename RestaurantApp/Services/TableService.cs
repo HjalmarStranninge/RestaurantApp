@@ -1,4 +1,5 @@
-﻿using RestaurantApp.Data.Repositories.IRepositories;
+﻿using RestaurantApp.Data.Repositories;
+using RestaurantApp.Data.Repositories.IRepositories;
 using RestaurantApp.Models;
 using RestaurantApp.Models.DTOs;
 using RestaurantApp.Services.IServices;
@@ -33,9 +34,17 @@ namespace RestaurantApp.Services
             }
         }
 
-        public Task<(bool, string)> DeleteTableAsync(int tableId)
+        public async Task<(bool, string)> DeleteTableAsync(int tableId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _tableRepository.DeleteTableAsync(tableId);
+                return (true, "Table deleted!");
+            }
+            catch (Exception)
+            {
+                return (false, "Table couldn't be deleted.");
+            }
         }
 
         public Task<IEnumerable<TableDTO>> GetAllTablesAsync()
