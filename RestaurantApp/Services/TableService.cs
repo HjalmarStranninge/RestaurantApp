@@ -18,7 +18,6 @@ namespace RestaurantApp.Services
         {
             var table = new Table
             {
-                Id = dto.Id,
                 Seats = dto.Seats,
                 TableNumber = dto.TableNumber
             };
