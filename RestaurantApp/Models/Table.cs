@@ -10,6 +10,7 @@ namespace RestaurantApp.Models
         public int Seats { get; set; }
         [Required]
         public int TableNumber { get; set; }
+        public bool IsAvailable { get; set; } = true;
         public virtual ICollection<Booking> Bookings { get; set; }
     }
 }

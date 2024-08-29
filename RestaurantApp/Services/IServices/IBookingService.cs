@@ -5,10 +5,10 @@ namespace RestaurantApp.Services.IServices
 {
     public interface IBookingService
     {
-        Task<(bool, string)> CreateBooking(BookingDTO bookingDTO);
-        Task<(bool, string)> UpdateBooking(BookingDTO bookingDTO);
+        Task<(bool, string)> CreateBooking(BookingRequestDTO dto);
+        Task<(bool, string)> UpdateBooking(BookingDTO dto);
         Task<(bool, string)> DeleteBooking(int id);
         Task<BookingDTO> GetBooking(int id);
-        Task<IEnumerable<BookingDTO>> GetAllBookings();
+        Task<IEnumerable<BookingRequestDTO>> GetAllBookings();
     }
 }

@@ -13,6 +13,15 @@ namespace RestaurantApp.Data
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<MenuItem> MenuItems { get; set; }
-        public DbSet<Table> Tables { get; set; } 
+        public DbSet<Table> Tables { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Table>()
+                .Property(t => t.IsAvailable)
+                .HasDefaultValue(true);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

@@ -8,5 +8,6 @@ namespace RestaurantApp.Data.Repositories.IRepositories
         Task CreateTableAsync(Table table);
         Task UpdateTableAsync(Table table);
         Task DeleteTableAsync(int tableId);
+        Task<Table> FindAvailableTableAsync(int seatsNeeded);
     }
 }
