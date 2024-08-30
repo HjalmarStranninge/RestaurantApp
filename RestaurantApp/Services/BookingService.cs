@@ -55,7 +55,7 @@ namespace RestaurantApp.Services
             try
             {
                 await _bookingRepository.CreateBookingAsync(booking);
-                return (true, "The requested sitting has now been booked.");
+                return (true, $"Table {table.TableNumber} successfully booked for {dto.CustomerFirstName} {dto.CustomerLastName} on {dto.RequestedDateTime:MMMM dd, yyyy} at {dto.RequestedDateTime:HH:mm}.");
             }
             catch (Exception ex)
             {
