@@ -7,8 +7,7 @@ namespace RestaurantApp.Models.DTOs
     {
         public int Id { get; set; }
         public int PartySize { get; set; }
-        public DateOnly Date { get; set; }
-        public TimeOnly Time { get; set; }
+        public DateTime DateTimeOfBooking { get; set; }
         public int FK_CustomerId { get; set; }
         public int FK_TableId { get; set; }
     }

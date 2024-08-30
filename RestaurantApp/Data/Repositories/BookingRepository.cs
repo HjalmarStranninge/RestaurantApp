@@ -13,13 +13,13 @@ namespace RestaurantApp.Data.Repositories
             _context = context;
         }
 
-        public async Task CreateBooking(Booking booking)
+        public async Task CreateBookingAsync(Booking booking)
         {
             _context.AddAsync(booking);
             _context.SaveChanges();
         }
 
-        public async Task DeleteBooking(int id)
+        public async Task DeleteBookingAsync(int id)
         {
             var booking = await _context.Bookings.FindAsync(id);
             if (booking != null)
@@ -29,18 +29,18 @@ namespace RestaurantApp.Data.Repositories
             }
         }
 
-        public async Task<IEnumerable<Booking>> GetAllBookings()
+        public async Task<IEnumerable<Booking>> GetAllBookingsAsync()
         {
             var bookings = await _context.Bookings.ToListAsync();
             return bookings;
         }
 
-        public async Task<Booking> GetBooking(int id)
+        public async Task<Booking> GetBookingAsync(int id)
         {
             return await _context.Bookings.FindAsync(id);          
         }
 
-        public async Task UpdateBooking(Booking booking)
+        public async Task UpdateBookingAsync(Booking booking)
         {
             _context.Bookings.Update(booking);
             await _context.SaveChangesAsync();

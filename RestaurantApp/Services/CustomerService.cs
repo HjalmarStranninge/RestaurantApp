@@ -73,9 +73,13 @@ namespace RestaurantApp.Services
             }
             catch (Exception ex)
             {
-
                 throw new Exception($"Something went wrong when extracting customer list: {ex}");
             }
+        }
+
+        public async Task<Customer> GetCustomerByPhoneNumberAsync(string phoneNumber)
+        {
+            return await _customerRepository.GetCustomerByPhoneNumberAsync(phoneNumber);
         }
 
         public async Task<(bool, string)> UpdateCustomerAsync(CustomerDTO dto)

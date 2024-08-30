@@ -46,16 +46,9 @@ namespace RestaurantApp.Services
             }
         }
 
-        public async Task<int> FindAvailableTableAsync(int seatsNeeded)
+        public async Task<Table> FindAvailableTableAsync(int seatsNeeded)
         {          
-            var table = await _tableRepository.FindAvailableTableAsync(seatsNeeded);
-
-            if (table == null)
-            {
-                return (0);
-            }
-
-            return table.Id;
+            return await _tableRepository.FindAvailableTableAsync(seatsNeeded);           
         }
 
         public async Task<IEnumerable<TableDTO>> GetAllTablesAsync()
@@ -104,5 +97,7 @@ namespace RestaurantApp.Services
                 return (false, "Table info couldn't be updated.");
             }
         }
+
+        
     }
 }

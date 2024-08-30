@@ -3,8 +3,7 @@
     public class BookingRequestDTO
     {
         public int PartySize { get; set; }
-        public DateOnly RequestedDate { get; set; }
-        public TimeOnly RequestedTime { get; set; }
+        public DateTime DateTimeOfBooking { get; set; }
         public string CustomerFirstName { get; set; }
         public string CustomerLastName { get; set; }
         public string CustomerEmail { get; set; }

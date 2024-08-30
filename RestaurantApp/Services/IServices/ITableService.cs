@@ -1,4 +1,5 @@
-﻿using RestaurantApp.Models.DTOs;
+﻿using RestaurantApp.Models;
+using RestaurantApp.Models.DTOs;
 
 namespace RestaurantApp.Services.IServices
 {
@@ -8,6 +9,6 @@ namespace RestaurantApp.Services.IServices
         Task<(bool, string)> CreateTableAsync(TableDTO dto);
         Task<(bool, string)> UpdateTableAsync(TableDTO dto);
         Task<(bool, string)> DeleteTableAsync(int tableId);
-        Task<int> FindAvailableTableAsync(int seatsNeeded);
+        Task<Table> FindAvailableTableAsync(int seatsNeeded);
     }
 }

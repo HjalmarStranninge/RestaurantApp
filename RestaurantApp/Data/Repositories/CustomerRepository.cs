@@ -34,6 +34,12 @@ namespace RestaurantApp.Data.Repositories
             return customers;
         }
 
+        public async Task<Customer> GetCustomerByPhoneNumberAsync(string phoneNumber)
+        {
+            return await _context.Customers
+                     .FirstOrDefaultAsync(c => c.PhoneNumber == phoneNumber);
+        }
+
         public async Task UpdateCustomerAsync(Customer customer)
         {
             _context.Customers.Update(customer);

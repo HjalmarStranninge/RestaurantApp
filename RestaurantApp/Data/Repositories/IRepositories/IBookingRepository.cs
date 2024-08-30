@@ -4,10 +4,10 @@ namespace RestaurantApp.Data.Repositories.IRepositories
 {
     public interface IBookingRepository
     {
-        Task CreateBooking(Booking booking);
-        Task UpdateBooking(Booking booking);
-        Task DeleteBooking(int id);
-        Task<Booking> GetBooking(int id);
-        Task<IEnumerable<Booking>> GetAllBookings();
+        Task CreateBookingAsync(Booking booking);
+        Task UpdateBookingAsync(Booking booking);
+        Task DeleteBookingAsync(int id);
+        Task<Booking> GetBookingAsync(int id);
+        Task<IEnumerable<Booking>> GetAllBookingsAsync();
     }
 }

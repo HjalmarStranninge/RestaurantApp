@@ -10,9 +10,7 @@ namespace RestaurantApp.Models
         [Required]
         public int PartySize { get; set; }
         [Required]
-        public DateOnly Date { get; set; }
-        [Required]
-        public TimeOnly Time { get; set; }
+        public DateTime DateTimeOfBooking { get; set; }
 
         [ForeignKey("Customer")]
         public int FK_CustomerId { get; set; }

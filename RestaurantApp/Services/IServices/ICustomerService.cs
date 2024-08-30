@@ -10,5 +10,6 @@ namespace RestaurantApp.Services.IServices
         Task<(bool, string)> CreateCustomerAsync(CustomerDTO dto);
         Task<(bool, string)> UpdateCustomerAsync(CustomerDTO dto);
         Task<(bool, string)> DeleteCustomerAsync(int customerId);
+        Task<Customer> GetCustomerByPhoneNumberAsync(string phoneNumber);
     }
 }
