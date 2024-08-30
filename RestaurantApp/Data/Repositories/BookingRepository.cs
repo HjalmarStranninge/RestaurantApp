@@ -15,7 +15,7 @@ namespace RestaurantApp.Data.Repositories
 
         public async Task CreateBookingAsync(Booking booking)
         {
-            _context.AddAsync(booking);
+            await _context.AddAsync(booking);
             _context.SaveChanges();
         }
 

@@ -14,13 +14,14 @@ namespace RestaurantApp.Data.Repositories
         }
 
         // Returns an available table. Prioritizes tables that match the required amount of seats.
-        public async Task<Table> FindAvailableTableAsync(int requiredSeats)
+        public async Task<Table> FindAvailableTableAsync(int requiredSeats, DateTime requestedStartTime, DateTime requestedEndTime)
         {
             return await _context.Tables
-                .Where(t => t.IsAvailable)
-                .OrderBy(t => t.Seats >= requiredSeats ? 0 : 1)
-                .ThenBy(t => t.Seats)
-                .FirstOrDefaultAsync(t => t.Seats >= requiredSeats);
+                .Where(t => t.Seats >= requiredSeats) 
+                .Where(t => !t.Bookings.Any(b =>
+                    b.EndDateTime > requestedStartTime && b.StartDateTime < requestedEndTime))
+                .OrderBy(t => t.Seats)
+                .FirstOrDefaultAsync();
         }
 
         public async Task CreateTableAsync(Table table)

@@ -9,6 +9,6 @@ namespace RestaurantApp.Services.IServices
         Task<(bool, string)> CreateTableAsync(TableDTO dto);
         Task<(bool, string)> UpdateTableAsync(TableDTO dto);
         Task<(bool, string)> DeleteTableAsync(int tableId);
-        Task<Table> FindAvailableTableAsync(int seatsNeeded);
+        Task<Table> FindAvailableTableAsync(int requiredSeats, DateTime requestedStartTime);
     }
 }

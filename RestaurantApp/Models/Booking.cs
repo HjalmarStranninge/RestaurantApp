@@ -10,7 +10,8 @@ namespace RestaurantApp.Models
         [Required]
         public int PartySize { get; set; }
         [Required]
-        public DateTime DateTimeOfBooking { get; set; }
+        public DateTime StartDateTime { get; set; }
+        public DateTime EndDateTime { get; set; }
 
         [ForeignKey("Customer")]
         public int FK_CustomerId { get; set; }

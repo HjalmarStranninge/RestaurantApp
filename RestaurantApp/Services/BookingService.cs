@@ -19,7 +19,7 @@ namespace RestaurantApp.Services
 
         public async Task<(bool, string)> CreateBookingAsync(BookingRequestDTO dto)
         {
-            var table = await _tableService.FindAvailableTableAsync(dto.PartySize);
+            var table = await _tableService.FindAvailableTableAsync(dto.PartySize, dto.RequestedDateTime);
 
             if (table == null)
             {
@@ -47,10 +47,11 @@ namespace RestaurantApp.Services
             {
                 Customer = await _customerService.GetCustomerByPhoneNumberAsync(dto.CustomerPhone),
                 PartySize = dto.PartySize,
-                //Date = new DateOnly(2024, 8, 3), 
-                //Time = new TimeOnly(18, 0), 
+                StartDateTime = dto.RequestedDateTime,
+                EndDateTime = dto.RequestedDateTime.AddHours(2),
                 Table = table,
             };
+
             try
             {
                 await _bookingRepository.CreateBookingAsync(booking);
