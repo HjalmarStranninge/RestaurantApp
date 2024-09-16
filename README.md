@@ -1,4 +1,4 @@
-# Booking, Customer, Menu Item, and Table Management API
+# Restaurant management API
 
 This API provides endpoints to manage bookings, customers, menu items, and tables for a restaurant system. Below is a list of available endpoints and their descriptions.
 
