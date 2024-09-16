@@ -31,9 +31,9 @@ namespace RestaurantApp.Data.Repositories
 
         public async Task<IEnumerable<Booking>> GetAllBookingsAsync()
         {
-            var bookings = await _context.Bookings.ToListAsync();
-            return bookings;
+            return await _context.Bookings.Include(b => b.Customer).Include(b => b.Table).ToListAsync();          
         }
+
 
         public async Task<Booking> GetBookingAsync(int id)
         {

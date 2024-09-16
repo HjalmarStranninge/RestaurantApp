@@ -10,6 +10,7 @@ namespace RestaurantApp.Services
         private readonly IBookingRepository _bookingRepository;
         private readonly ITableService _tableService;
         private readonly ICustomerService _customerService;
+
         public BookingService(IBookingRepository bookingRepository, ITableService tableService, ICustomerService customerService)
         {
             _bookingRepository = bookingRepository;
@@ -26,7 +27,7 @@ namespace RestaurantApp.Services
                 return (false, "There are no available tables.");
             }
 
-            var customerDTO = new CustomerDTO
+            var customerDTO = new CustomerCreateDTO
             {
                 FirstName = dto.CustomerFirstName,
                 LastName = dto.CustomerLastName,
@@ -59,29 +60,72 @@ namespace RestaurantApp.Services
             }
             catch (Exception ex)
             {
-
                 return (false, $"Something went wrong when booking: {ex}");
             }
         }
 
-        public Task<(bool, string)> DeleteBookingAsync(int id)
+        public async Task<(bool, string)> DeleteBookingAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _bookingRepository.DeleteBookingAsync(id);
+                return (true, "Booking deleted successfully!");
+            }
+            catch (Exception ex)
+            {
+                return (false, $"Something went wrong when deleting the booking: {ex}");
+            }
         }
 
-        public Task<IEnumerable<BookingDTO>> GetAllBookingsAsync()
+        public async Task<IEnumerable<BookingDTO>> GetAllBookingsAsync()
         {
-            throw new NotImplementedException();
+            var bookings = await _bookingRepository.GetAllBookingsAsync();
+            var bookingList = new List<BookingDTO>();
+
+            foreach (var booking in bookings)
+            {
+                var dto = new BookingDTO
+                {
+                    Id = booking.Id,
+                    CustomerId = booking.Customer.Id,
+                    TableId = booking.Table.Id,
+                    PartySize = booking.PartySize,
+                    StartDateTime = booking.StartDateTime,
+                    EndDateTime = booking.EndDateTime
+                };
+                bookingList.Add(dto);
+            }
+
+            return bookingList;
         }
 
-        public Task<BookingDTO> GetBookingAsync(int id)
+        public async Task<Booking> GetBookingAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _bookingRepository.GetBookingAsync(id);
         }
 
-        public Task<(bool, string)> UpdateBookingAsync(BookingDTO dto)
+        public async Task<(bool, string)> UpdateBookingAsync(BookingUpdateDTO dto)
         {
-            throw new NotImplementedException();
+            var booking = await _bookingRepository.GetBookingAsync(dto.Id);
+            if (booking == null)
+            {
+                return (false, "Booking not found.");
+            }
+
+            booking.PartySize = dto.PartySize;
+            booking.StartDateTime = dto.StartDateTime;
+            booking.EndDateTime = dto.EndDateTime;
+
+            try
+            {
+                await _bookingRepository.UpdateBookingAsync(booking);
+                return (true, "Booking updated successfully!");
+            }
+            catch (Exception ex)
+            {
+                return (false, $"Something went wrong when updating the booking: {ex}");
+            }
         }
+
     }
 }

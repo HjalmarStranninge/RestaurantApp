@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using RestaurantApp.Data.Repositories.IRepositories;
+﻿using RestaurantApp.Data.Repositories.IRepositories;
 using RestaurantApp.Models;
 using RestaurantApp.Models.DTOs;
 using RestaurantApp.Services.IServices;
@@ -14,7 +13,8 @@ namespace RestaurantApp.Services
         {
             _customerRepository = customerRepository;
         }
-        public async Task<(bool, string)> CreateCustomerAsync(CustomerDTO dto)
+
+        public async Task<(bool, string)> CreateCustomerAsync(CustomerCreateDTO dto)
         {
             var customer = new Customer
             {
@@ -32,7 +32,7 @@ namespace RestaurantApp.Services
             catch (Exception)
             {
                 return (false, "Something went wrong when adding new customer to database.");
-            }          
+            }
         }
 
         public async Task<(bool, string)> DeleteCustomerAsync(int customerId)
@@ -46,7 +46,6 @@ namespace RestaurantApp.Services
             {
                 return (false, "Customer couldn't be deleted.");
             }
-            
         }
 
         public async Task<IEnumerable<CustomerDTO>> GetAllCustomersAsync()
@@ -75,6 +74,11 @@ namespace RestaurantApp.Services
             {
                 throw new Exception($"Something went wrong when extracting customer list: {ex}");
             }
+        }
+
+        public async Task<Customer> GetCustomerByIdAsync(int customerId)
+        {
+            return await _customerRepository.GetCustomerByIdAsync(customerId);
         }
 
         public async Task<Customer> GetCustomerByPhoneNumberAsync(string phoneNumber)

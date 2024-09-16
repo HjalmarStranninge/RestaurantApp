@@ -10,6 +10,7 @@ namespace RestaurantApp.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerService _customerService;
+
         public CustomerController(ICustomerService customerService)
         {
             _customerService = customerService;
@@ -17,7 +18,7 @@ namespace RestaurantApp.Controllers
 
         [HttpPost]
         [Route("/createcustomer")]
-        public async Task<ActionResult> CreateCustomer(CustomerDTO dto)
+        public async Task<ActionResult> CreateCustomer(CustomerCreateDTO dto)
         {
             var (success, message) = await _customerService.CreateCustomerAsync(dto);
 
@@ -26,7 +27,6 @@ namespace RestaurantApp.Controllers
                 return Ok(message);
             }
             return BadRequest(message);
-
         }
 
         [HttpDelete]
@@ -61,6 +61,30 @@ namespace RestaurantApp.Controllers
         {
             var customers = await _customerService.GetAllCustomersAsync();
             return Ok(customers);
+        }
+
+        [HttpGet]
+        [Route("/getcustomerbyphone")]
+        public async Task<ActionResult> GetCustomerByPhone(string phoneNumber)
+        {
+            var customer = await _customerService.GetCustomerByPhoneNumberAsync(phoneNumber);
+            if (customer == null)
+            {
+                return NotFound("Customer not found");
+            }
+            return Ok(customer);
+        }
+
+        [HttpGet]
+        [Route("/getcustomerbyid")]
+        public async Task<ActionResult> GetCustomerById(int id)
+        {
+            var customer = await _customerService.GetCustomerByIdAsync(id);
+            if (customer == null)
+            {
+                return NotFound("Customer not found");
+            }
+            return Ok(customer);
         }
     }
 }

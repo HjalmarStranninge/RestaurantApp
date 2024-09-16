@@ -9,5 +9,6 @@ namespace RestaurantApp.Data.Repositories.IRepositories
         Task UpdateCustomerAsync(Customer customer);
         Task DeleteCustomerAsync(int customerId);
         Task<Customer> GetCustomerByPhoneNumberAsync(string phoneNumber);
+        Task<Customer> GetCustomerByIdAsync(int customerId);
     }
 }

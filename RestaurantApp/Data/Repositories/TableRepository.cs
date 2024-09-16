@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using RestaurantApp.Data.Repositories.IRepositories;
 using RestaurantApp.Models;
 
@@ -17,7 +16,7 @@ namespace RestaurantApp.Data.Repositories
         public async Task<Table> FindAvailableTableAsync(int requiredSeats, DateTime requestedStartTime, DateTime requestedEndTime)
         {
             return await _context.Tables
-                .Where(t => t.Seats >= requiredSeats) 
+                .Where(t => t.Seats >= requiredSeats)
                 .Where(t => !t.Bookings.Any(b =>
                     b.EndDateTime > requestedStartTime && b.StartDateTime < requestedEndTime))
                 .OrderBy(t => t.Seats)
@@ -50,6 +49,11 @@ namespace RestaurantApp.Data.Repositories
         {
             _context.Tables.Update(table);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<Table> GetTableByIdAsync(int tableId) 
+        {
+            return await _context.Tables.FindAsync(tableId);
         }
     }
 }

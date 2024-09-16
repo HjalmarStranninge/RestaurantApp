@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantApp.Models.DTOs;
-using RestaurantApp.Services;
 using RestaurantApp.Services.IServices;
 
 namespace RestaurantApp.Controllers
@@ -11,6 +10,7 @@ namespace RestaurantApp.Controllers
     public class TableController : ControllerBase
     {
         private readonly ITableService _tableService;
+
         public TableController(ITableService tableService)
         {
             _tableService = tableService;
@@ -18,7 +18,7 @@ namespace RestaurantApp.Controllers
 
         [HttpPost]
         [Route("/createtable")]
-        public async Task<ActionResult> CreateTable(TableDTO dto)
+        public async Task<ActionResult> CreateTable(TableCreateDTO dto)
         {
             var (success, message) = await _tableService.CreateTableAsync(dto);
 
@@ -44,7 +44,7 @@ namespace RestaurantApp.Controllers
 
         [HttpPost]
         [Route("/updatetable")]
-        public async Task<ActionResult> UpdateTableInfo(TableDTO dto)
+        public async Task<ActionResult> UpdateTable(TableDTO dto)
         {
             var (success, message) = await _tableService.UpdateTableAsync(dto);
 
@@ -62,5 +62,18 @@ namespace RestaurantApp.Controllers
             var tables = await _tableService.GetAllTablesAsync();
             return Ok(tables);
         }
+
+        [HttpGet]
+        [Route("/gettable")]
+        public async Task<ActionResult> GetTable(int id)
+        {
+            var table = await _tableService.GetTableByIdAsync(id);
+            if (table == null)
+            {
+                return NotFound("Table not found");
+            }
+            return Ok(table);
+        }
     }
 }
+
