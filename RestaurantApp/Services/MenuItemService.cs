@@ -19,6 +19,7 @@ namespace RestaurantApp.Services
             var menuItem = new MenuItem
             {
                 Name = dto.Name,
+                Description = dto.Description,
                 Price = dto.Price,
                 IsAvailable = dto.IsAvailable
             };
@@ -80,6 +81,7 @@ namespace RestaurantApp.Services
             {
                 Id = menuItem.Id,
                 Name = menuItem.Name,
+                Description = menuItem.Description,
                 Price = menuItem.Price,
                 IsAvailable = menuItem.IsAvailable
             };
@@ -96,6 +98,7 @@ namespace RestaurantApp.Services
                 {
                     Id = menuItem.Id,
                     Name = menuItem.Name,
+                    Description = menuItem.Description,
                     Price = menuItem.Price,
                     IsAvailable = menuItem.IsAvailable
                 };

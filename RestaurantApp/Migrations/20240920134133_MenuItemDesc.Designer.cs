@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestaurantApp.Data;
 
@@ -11,9 +12,11 @@ using RestaurantApp.Data;
 namespace RestaurantApp.Migrations
 {
     [DbContext(typeof(RestaurantAppContext))]
-    partial class RestaurantAppContextModelSnapshot : ModelSnapshot
+    [Migration("20240920134133_MenuItemDesc")]
+    partial class MenuItemDesc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,18 +110,6 @@ namespace RestaurantApp.Migrations
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
-
-                    b.Property<bool>("isAppetizer")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isCocktail")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isDesert")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isMainCourse")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
