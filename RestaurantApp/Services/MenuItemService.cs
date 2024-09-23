@@ -100,7 +100,11 @@ namespace RestaurantApp.Services
                     Name = menuItem.Name,
                     Description = menuItem.Description,
                     Price = menuItem.Price,
-                    IsAvailable = menuItem.IsAvailable
+                    IsAvailable = menuItem.IsAvailable,
+                    isAppetizer = menuItem.isAppetizer,
+                    isMainCourse = menuItem.isMainCourse,
+                    isDesert = menuItem.isDesert,
+                    isCocktail = menuItem.isCocktail
                 };
                 menuItemList.Add(dto);
             }
