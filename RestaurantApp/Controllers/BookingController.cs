@@ -42,7 +42,7 @@ namespace RestaurantApp.Controllers
             return BadRequest(message);
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("/updatebooking")]
         public async Task<IActionResult> UpdateBooking(BookingUpdateDTO dto)
         {

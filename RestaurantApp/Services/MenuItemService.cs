@@ -40,6 +40,7 @@ namespace RestaurantApp.Services
             var menuItem = new MenuItem
             {
                 Id = dto.Id,
+                Description = dto.Description,
                 Name = dto.Name,
                 Price = dto.Price,
                 IsAvailable = dto.IsAvailable

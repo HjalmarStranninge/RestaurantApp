@@ -42,7 +42,7 @@ namespace RestaurantApp.Controllers
             return BadRequest(message);
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("/updatetable")]
         public async Task<ActionResult> UpdateTable(TableDTO dto)
         {
